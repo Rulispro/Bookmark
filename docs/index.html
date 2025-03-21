@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Like Facebook</title>
+</head>
+<body>
+    <button onclick="startAutoLike()">Mulai Auto Like</button>
+
+    <script>
+        function startAutoLike() {
+            let totalClicks = prompt("Masukkan jumlah total tombol Like yang ingin diklik:", "10");
+            totalClicks = parseInt(totalClicks);
+            
+            if (isNaN(totalClicks) || totalClicks <= 0) {
+                alert("Jumlah tidak valid!");
+                return;
+            }
+
+            let buttons = document.querySelectorAll('div[role="button"][aria-label*="like"]'); 
+            
+            if (buttons.length === 0) {
+                alert("❌ Tidak ada tombol Like ditemukan.");
+                return;
+            }
+
+            let count = 0;
+            let index = 0;
+
+            let interval = setInterval(() => {
+                if (index >= buttons.length || count >= totalClicks) {
+                    clearInterval(interval);
+                    alert(`🎉 Selesai! Telah mengklik ${count} tombol Like.`);
+                    return;
+                }
+
+                buttons[index].click();
+                console.log(`✔ Klik tombol Like ke-${++count}`);
+                index++;
+            }, 7000);
+        }
+    </script>
+</body>
+</html>
